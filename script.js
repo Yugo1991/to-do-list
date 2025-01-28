@@ -1,24 +1,27 @@
-document.getElementById('add-btn').addEventListener('click', function () {
-    const todoInput = document.getElementById('todo-input');
-    const task = todoInput.ariaValueMax.trim();
+const addButton = document.getElementById('add-btn');
+const todoInput = document.getElementById('todo-input');
+const todoList = document.getElementById('todo-list');
 
-    if (task === '') {
-        alert('Please enter a task!');
-        return;
-    }
+if (addButton && todoInput && todoList) {
+    addButton.addEventListener('click', function () {
+        const task = todoInput.value.trim();
 
-    const listItem = document.createElement('li');
-    listItem.className = 'todo-item';
-    listItem.innerText = `
-        <span>${task}</span>
-        <button class="delete-btn">Delete</button>
-    `;
+        if (task === '') {
+            alert('Please enter a task!');
+            return;
+        }
 
-    document.getElementById('todo-list').appendChild(listItem);
+        const listItem = document.createElement('li');
+        listItem.className = 'todo-item';
+        listItem.innerHTML = `
+            <span>${task}</span>
+            <button class="delete-btn">Delete</button>
+        `;
 
-    todoInput.value = '';
+        todoList.appendChild(listItem);
 
-    listItem.querySelector('.delete-btn').addEventListener('click', function () {
-        listItem.remove();
+        listItem.querySelector('.delete-btn').addEventListener('click', function () {
+            listItem.remove();
+        });
     });
-});
+}
